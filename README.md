@@ -8,6 +8,17 @@
 - [Vite](https://vite.dev/)
 - [Tailwind CSS 4](https://tailwindcss.com/)
 - [React 19](https://react.dev/)
+- [Open Trivia DB](https://opentdb.com/)
+
+## Components
+
+- TriviaGame
+    - GameHeader
+        - QuestionCounter
+        - ScoreDisplay
+    - GameBoard
+        - QuestionText
+        - AnswerOptions
 
 ## Improvements
 
@@ -22,7 +33,7 @@ npm run dev # http://localhost:3000
 
 ## Dev Notes
 
-## Create project
+### Create project
 
 ```sh
 cd ~/Dev
@@ -46,7 +57,7 @@ Moved files I don't need into `/_old`
 
 Stripped out boilerplate HTML, CSS
 
-## Tailwind v4
+### Tailwind v4
 
 `npm install tailwindcss @tailwindcss/vite`
 
@@ -65,7 +76,7 @@ export default defineConfig({
 
 index.css: Add `@import "tailwindcss"` to the top of file
 
-## VSCode
+### VSCode
 
 Enable [Tailwind CSS Intellisense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) extension
 
@@ -80,3 +91,30 @@ Add association to workspace settings:
   }
 }
 ```
+
+### Git
+
+#### Create local repo
+
+```sh
+git init
+git add .
+git commit -m "First commit"
+```
+
+#### Create new repo on GitHub
+
+GitHub > New > Create a new repository
+
+- Repository name: trivia_quiz
+- Description: Trivia game using React and Open Trivia DB.
+
+Create Repository button
+
+#### Select remote repo in VSCode
+
+Source Control > ... menu > Remote > Add Remote... > Add remote from GitHub
+
+(select trivia_quiz repo)
+
+Give it a local name of `trivia_quiz` as well
