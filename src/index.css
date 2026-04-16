@@ -69,7 +69,7 @@
 
 @layer components {
   button {
-    @apply cursor-pointer rounded bg-button font-semibold text-white transition hover:cursor-pointer hover:bg-button-hover;
+    @apply cursor-pointer rounded bg-button px-4 py-2 font-semibold text-white transition hover:cursor-pointer hover:bg-button-hover;
   }
 
   .game-content {

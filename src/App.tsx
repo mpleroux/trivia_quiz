@@ -54,16 +54,11 @@ function AnswerOptions({
 }) {
   return (
     <div className="flex justify-between">
-      <button
-        className="px-4 py-2"
-        onClick={() => onAnswerClick(currentQuestion.correct_answer)}>
+      <button onClick={() => onAnswerClick(currentQuestion.correct_answer)}>
         {currentQuestion.correct_answer}
       </button>
       {currentQuestion.incorrect_answers.map((answer) => (
-        <button
-          className="px-4 py-2"
-          key={answer}
-          onClick={() => onAnswerClick(answer)}>
+        <button key={answer} onClick={() => onAnswerClick(answer)}>
           {answer}
         </button>
       ))}
@@ -92,9 +87,11 @@ function GameBoard({
 function GameOver({
   score,
   totalQuestions,
+  onPlayAgain,
 }: {
   score: number;
   totalQuestions: number;
+  onPlayAgain: () => void;
 }) {
   return (
     <div className="game-content">
@@ -102,6 +99,7 @@ function GameOver({
       <p>
         You scored {score} out of {totalQuestions}
       </p>
+      <button onClick={onPlayAgain}>Play Again</button>
     </div>
   );
 }
@@ -109,6 +107,11 @@ function GameOver({
 function TriviaGame({ questions }: { questions: Question[] }) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
+
+  const handlePlayAgain = () => {
+    setCurrentQuestionIndex(0);
+    setScore(0);
+  };
 
   // Event handler for buttons
   const handleAnswerClick = (selectedAnswer: string) => {
@@ -127,7 +130,11 @@ function TriviaGame({ questions }: { questions: Question[] }) {
   return (
     <div className="game-content">
       {currentQuestionIndex >= questions.length ? (
-        <GameOver score={score} totalQuestions={questions.length} />
+        <GameOver
+          score={score}
+          totalQuestions={questions.length}
+          onPlayAgain={handlePlayAgain}
+        />
       ) : (
         <>
           <GameHeader
