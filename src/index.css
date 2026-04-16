@@ -1,9 +1,30 @@
 @import "tailwindcss";
 
+/* define the custom dark variant for utility classes */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* set default (light mode) values */
+  --color-page-bg: var(--color-gray-100);
+  --color-page-text: var(--color-gray-800);
+  --color-link: var(--color-gray-600);
+  --color-button: var(--color-gray-400);
+  --color-button-hover: var(--color-gray-500);
+}
+
+/* manual toggle: if .dark class is on <html> */
+.dark {
+  --color-page-bg: var(--color-gray-800);
+  --color-page-text: var(--color-gray-200);
+  --color-link: var(--color-blue-400);
+  --color-button: var(--color-gray-500);
+  --color-button-hover: var(--color-gray-600);
+}
+
 /* add basic styles after Preflight */
 @layer base {
   body {
-    @apply transition-colors duration-300;
+    @apply bg-page-bg text-page-text transition-colors duration-300;
   }
   h1 {
     @apply mb-5 text-2xl font-bold tracking-tight sm:text-3xl;
@@ -31,7 +52,7 @@
     @apply mb-0 list-[circle];
   }
   a {
-    @apply underline transition-opacity hover:opacity-80;
+    @apply text-link underline transition-opacity hover:opacity-80;
   }
   pre {
     @apply mb-4 px-4 py-2 text-xs sm:text-sm;
@@ -48,6 +69,10 @@
 
 @layer components {
   button {
-    @apply cursor-pointer rounded bg-gray-400 font-semibold text-white transition hover:cursor-pointer hover:bg-gray-500;
+    @apply cursor-pointer rounded bg-button font-semibold text-white transition hover:cursor-pointer hover:bg-button-hover;
+  }
+
+  .game-content {
+    @apply mx-auto px-4 text-sm sm:max-w-2xl sm:px-6 sm:text-base md:max-w-3xl;
   }
 }
