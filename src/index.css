@@ -1,1 +1,53 @@
 @import "tailwindcss";
+
+/* add basic styles after Preflight */
+@layer base {
+  body {
+    @apply transition-colors duration-300;
+  }
+  h1 {
+    @apply mb-5 text-2xl font-bold tracking-tight sm:text-3xl;
+  }
+  h2 {
+    @apply mb-4 text-xl font-semibold sm:text-2xl;
+  }
+  h3 {
+    @apply mb-3 text-lg font-semibold sm:text-xl;
+  }
+  h4 {
+    @apply mb-3 text-base font-semibold sm:text-lg;
+  }
+  p {
+    @apply mb-4;
+  }
+  ul {
+    @apply mb-4 list-disc pl-4;
+  }
+  ol {
+    @apply mb-4 list-decimal pl-4;
+  }
+  li > ul,
+  li > ol {
+    @apply mb-0 list-[circle];
+  }
+  a {
+    @apply underline transition-opacity hover:opacity-80;
+  }
+  pre {
+    @apply mb-4 px-4 py-2 text-xs sm:text-sm;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      @apply animate-none! scroll-auto! transition-none!;
+    }
+  }
+}
+
+@layer components {
+  button {
+    @apply cursor-pointer rounded bg-gray-400 font-semibold text-white transition hover:cursor-pointer hover:bg-gray-500;
+  }
+}
