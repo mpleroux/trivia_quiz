@@ -14,7 +14,7 @@ function QuestionCounter({
 }: {
   currentQuestionIndex: number;
 }) {
-  return <div>Question: {++currentQuestionIndex}</div>;
+  return <div>Question: {currentQuestionIndex + 1}</div>;
 }
 
 function ScoreDisplay({ score }: { score: number }) {
@@ -89,34 +89,62 @@ function GameBoard({
   );
 }
 
-function TriviaGame({ questions }: { questions: Question[] }) {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [score, setScore] = useState(0);
-
-  // event handler for buttons
-  const handleAnswerClick = (selectedAnswer: string) => {
-    const currentQuestion = questions[currentQuestionIndex];
-
-    // increment score for correct answer
-    if (selectedAnswer === currentQuestion.correct_answer) {
-      setScore(score + 1);
-    }
-
-    // advance to next question
-    setCurrentQuestionIndex(currentQuestionIndex + 1);
-  };
-
+function GameOver({
+  score,
+  totalQuestions,
+}: {
+  score: number;
+  totalQuestions: number;
+}) {
   return (
-    <div className="mx-auto px-4 text-sm sm:max-w-2xl sm:px-6 sm:text-base md:max-w-3xl">
-      <GameHeader currentQuestionIndex={currentQuestionIndex} score={score} />
-      <GameBoard
-        currentQuestion={questions[currentQuestionIndex]}
-        onAnswerClick={handleAnswerClick}
-      />
+    <div className="game-content">
+      <p>Game Over!</p>
+      <p>
+        You scored {score} out of {totalQuestions}
+      </p>
     </div>
   );
 }
 
+function TriviaGame({ questions }: { questions: Question[] }) {
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [score, setScore] = useState(0);
+
+  // Event handler for buttons
+  const handleAnswerClick = (selectedAnswer: string) => {
+    const currentQuestion = questions[currentQuestionIndex];
+
+    // Increment score for correct answer
+    if (selectedAnswer === currentQuestion.correct_answer) {
+      setScore(score + 1);
+    }
+
+    // Advance to next question
+    setCurrentQuestionIndex(currentQuestionIndex + 1);
+  };
+
+  // Show game components or game over page if there are no more questions
+  return (
+    <div className="game-content">
+      {currentQuestionIndex >= questions.length ? (
+        <GameOver score={score} totalQuestions={questions.length} />
+      ) : (
+        <>
+          <GameHeader
+            currentQuestionIndex={currentQuestionIndex}
+            score={score}
+          />
+          <GameBoard
+            currentQuestion={questions[currentQuestionIndex]}
+            onAnswerClick={handleAnswerClick}
+          />
+        </>
+      )}
+    </div>
+  );
+}
+
+// Trivia data hardcoded for now
 const QUESTIONS = [
   {
     type: "multiple",
