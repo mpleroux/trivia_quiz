@@ -19,6 +19,7 @@
     - GameBoard
         - QuestionText
         - AnswerOptions
+    - GameOver
 
 ## Improvements
 
@@ -31,7 +32,9 @@ npm run dev # http://localhost:3000
 
 ## Screenshot
 
-## Dev Notes
+TODO
+
+## Setup notes
 
 ### Create project
 
@@ -91,30 +94,3 @@ Add association to workspace settings:
   }
 }
 ```
-
-### Git
-
-#### Create local repo
-
-```sh
-git init
-git add .
-git commit -m "First commit"
-```
-
-#### Create new repo on GitHub
-
-GitHub > New > Create a new repository
-
-- Repository name: trivia_quiz
-- Description: Trivia game using React and Open Trivia DB.
-
-Create Repository button
-
-#### Select remote repo in VSCode
-
-Source Control > ... menu > Remote > Add Remote... > Add remote from GitHub
-
-(select trivia_quiz repo)
-
-Give it a local name of `trivia_quiz` as well
