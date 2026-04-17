@@ -234,7 +234,7 @@ const QUESTIONS = [
     type: "multiple",
     difficulty: "hard",
     category: "Geography",
-    question: "With which country does France share its largest land border",
+    question: "With which country does France share its largest land border?",
     correct_answer: "Brazil",
     incorrect_answers: ["Germany", "Spain", "Canada"],
   },
