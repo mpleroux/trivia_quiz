@@ -40,7 +40,7 @@ npm run dev # http://localhost:3000
 
 ## Screenshot
 
-TODO
+<img src="./public/screenshot.png" width="400" alt="Screenshot of trivia game">
 
 ## Setup notes
 
