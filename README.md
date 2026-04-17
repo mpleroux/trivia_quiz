@@ -14,8 +14,6 @@
 
 - TriviaGame
     - GameHeader
-        - QuestionCounter
-        - ScoreDisplay
     - GameBoard
         - QuestionText
         - AnswerOptions

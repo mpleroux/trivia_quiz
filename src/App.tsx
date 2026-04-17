@@ -9,6 +9,12 @@ interface Question {
   incorrect_answers: string[];
 }
 
+function decodeHTML(html: string): string {
+  const el = document.createElement("textarea");
+  el.innerHTML = html;
+  return el.value;
+}
+
 // This must be located outside a component, due to Math.random() being an "impure function"
 function shuffleAnswers(correct: string, incorrect: string[]): string[] {
   const answers = [correct, ...incorrect];
@@ -20,18 +26,6 @@ function shuffleAnswers(correct: string, incorrect: string[]): string[] {
   return answers;
 }
 
-function QuestionCounter({
-  currentQuestionIndex,
-}: {
-  currentQuestionIndex: number;
-}) {
-  return <div>Question: {currentQuestionIndex + 1}</div>;
-}
-
-function ScoreDisplay({ score }: { score: number }) {
-  return <div>Score: {score}</div>;
-}
-
 function GameHeader({
   currentQuestionIndex,
   score,
@@ -40,19 +34,18 @@ function GameHeader({
   score: number;
 }) {
   return (
-    <div className="flex justify-between">
-      <QuestionCounter currentQuestionIndex={currentQuestionIndex} />
-      <ScoreDisplay score={score} />
-    </div>
+    <header className="mb-4 flex justify-between text-sm">
+      <div>Question: {currentQuestionIndex + 1}</div>
+      <div>Score: {score}</div>
+    </header>
   );
 }
 
 function QuestionText({ currentQuestion }: { currentQuestion: Question }) {
   return (
-    <div>
-      <p>Category: {currentQuestion.category}</p>
-      <p>Question: {currentQuestion.question}</p>
-    </div>
+    <h1 className="text-lg font-medium">
+      {currentQuestion.category}: {decodeHTML(currentQuestion.question)}
+    </h1>
   );
 }
 
@@ -69,21 +62,27 @@ function AnswerOptions({
   );
 
   return (
-    <div className="flex justify-between">
+    <fieldset className="flex justify-between">
+      <legend className="sr-only">Select your answer</legend>
       {shuffledAnswers.map((answer) => (
-        <button key={answer} onClick={() => onAnswerClick(answer)}>
+        <button
+          key={answer}
+          onClick={() => onAnswerClick(answer)}
+          aria-label={`Answer: ${answer}`}>
           {answer}
         </button>
       ))}
-    </div>
+    </fieldset>
   );
 }
 
 function GameBoard({
   currentQuestion,
+  currentQuestionIndex,
   onAnswerClick,
 }: {
   currentQuestion: Question;
+  currentQuestionIndex: number;
   onAnswerClick: (answer: string) => void;
 }) {
   // Key forces fresh shuffled answers
@@ -91,7 +90,7 @@ function GameBoard({
     <>
       <QuestionText currentQuestion={currentQuestion} />
       <AnswerOptions
-        key={currentQuestion.question}
+        key={currentQuestionIndex}
         currentQuestion={currentQuestion}
         onAnswerClick={onAnswerClick}
       />
@@ -109,13 +108,13 @@ function GameOver({
   onPlayAgain: () => void;
 }) {
   return (
-    <div className="game-content">
+    <section className="game-content">
       <p>Game Over!</p>
       <p>
         You scored {score} out of {totalQuestions}
       </p>
       <button onClick={onPlayAgain}>Play Again</button>
-    </div>
+    </section>
   );
 }
 
@@ -158,6 +157,7 @@ function TriviaGame({ questions }: { questions: Question[] }) {
           />
           <GameBoard
             currentQuestion={questions[currentQuestionIndex]}
+            currentQuestionIndex={currentQuestionIndex}
             onAnswerClick={handleAnswerClick}
           />
         </>
