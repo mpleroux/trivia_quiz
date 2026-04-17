@@ -2,12 +2,18 @@
 
 ## Features
 
+- Displays multiple choice trivia questions with buttons for answers
+- Question number and score are displayed in header
+- Color-codes buttons based on result; green for correct, red for incorrect
+- Waits 1.5 seconds and advances to the next question
+- Display final score and button to restart game
+
 ## Tech Stack
 
-- [TypeScript](https://www.typescriptlang.org/)
-- [Vite](https://vite.dev/)
-- [Tailwind CSS 4](https://tailwindcss.com/)
 - [React 19](https://react.dev/)
+- [Vite](https://vite.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS 4](https://tailwindcss.com/)
 - [Open Trivia DB](https://opentdb.com/)
 
 ## Components
@@ -20,6 +26,10 @@
     - GameOver
 
 ## Improvements
+
+- [ ] Load questions from Open Trivia DB instead of hardcoded array
+- [ ] Deploy to Netlify
+- [ ] Styling
 
 ## Run locally
 
