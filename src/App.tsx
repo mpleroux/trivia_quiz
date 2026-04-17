@@ -9,6 +9,17 @@ interface Question {
   incorrect_answers: string[];
 }
 
+// This must be located outside a component, due to Math.random() being an "impure function"
+function shuffleAnswers(correct: string, incorrect: string[]): string[] {
+  const answers = [correct, ...incorrect];
+  // Fisher-Yates
+  for (let i = answers.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [answers[i], answers[j]] = [answers[j], answers[i]];
+  }
+  return answers;
+}
+
 function QuestionCounter({
   currentQuestionIndex,
 }: {
@@ -52,12 +63,14 @@ function AnswerOptions({
   currentQuestion: Question;
   onAnswerClick: (answer: string) => void;
 }) {
+  const shuffledAnswers = shuffleAnswers(
+    currentQuestion.correct_answer,
+    currentQuestion.incorrect_answers,
+  );
+
   return (
     <div className="flex justify-between">
-      <button onClick={() => onAnswerClick(currentQuestion.correct_answer)}>
-        {currentQuestion.correct_answer}
-      </button>
-      {currentQuestion.incorrect_answers.map((answer) => (
+      {shuffledAnswers.map((answer) => (
         <button key={answer} onClick={() => onAnswerClick(answer)}>
           {answer}
         </button>
@@ -73,10 +86,12 @@ function GameBoard({
   currentQuestion: Question;
   onAnswerClick: (answer: string) => void;
 }) {
+  // Key forces fresh shuffled answers
   return (
     <>
       <QuestionText currentQuestion={currentQuestion} />
       <AnswerOptions
+        key={currentQuestion.question}
         currentQuestion={currentQuestion}
         onAnswerClick={onAnswerClick}
       />
