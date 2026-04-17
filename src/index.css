@@ -24,7 +24,7 @@
 /* add basic styles after Preflight */
 @layer base {
   body {
-    @apply bg-page-bg text-page-text transition-colors duration-300;
+    @apply bg-page-bg text-page-text;
   }
   h1 {
     @apply mb-5 text-2xl font-bold tracking-tight sm:text-3xl;
