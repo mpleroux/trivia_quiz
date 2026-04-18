@@ -9,6 +9,11 @@ interface Question {
   incorrect_answers: string[];
 }
 
+interface OpenTDBResponse {
+  response_code: number;
+  results: Question[];
+}
+
 function decodeHTML(html: string): string {
   const el = document.createElement("textarea");
   el.innerHTML = html;
@@ -87,22 +92,22 @@ function AnswerOptions({
   }, [answered, onAnswerClick]);
 
   return (
-    <fieldset className="flex justify-between">
+    <fieldset>
       <legend className="sr-only">Select your answer</legend>
       {shuffledAnswers.map((answer) => {
         const isCorrect = answer === currentQuestion.correct_answer;
         const isSelected = answer === answered;
 
         // Determine button styling based on feedback state
-        let buttonClass = "";
+        let buttonClass = "block mb-4";
         if (answered) {
           if (isCorrect) {
-            buttonClass = "bg-green-500 hover:bg-green-600";
+            buttonClass += " bg-green-500 hover:bg-green-600";
           } else if (isSelected) {
             // not correct
-            buttonClass = "bg-red-500 hover:bg-red-600";
+            buttonClass += " bg-red-500 hover:bg-red-600";
           } else {
-            buttonClass = "opacity-50";
+            buttonClass += " opacity-50";
           }
         }
 
@@ -147,29 +152,42 @@ function GameOver({
   score,
   totalQuestions,
   onPlayAgain,
+  isLoading = false,
 }: {
   score: number;
   totalQuestions: number;
   onPlayAgain: () => void;
+  isLoading?: boolean;
 }) {
   return (
-    <section className="game-content">
-      <p>Game Over!</p>
+    <>
+      <h1 className="text-lg font-medium">Game Over!</h1>
       <p>
-        You scored {score} out of {totalQuestions}
+        You scored {score} out of {totalQuestions}.
       </p>
-      <button onClick={onPlayAgain}>Play Again</button>
-    </section>
+      <button onClick={onPlayAgain} disabled={isLoading}>
+        {isLoading ? "Loading new questions..." : "Play Again"}
+      </button>
+    </>
   );
 }
 
-function TriviaGame({ questions }: { questions: Question[] }) {
+function TriviaGame({
+  questions,
+  onPlayAgain,
+  isLoading = false,
+}: {
+  questions: Question[];
+  onPlayAgain?: () => void;
+  isLoading?: boolean;
+}) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
 
   const handlePlayAgain = () => {
     setCurrentQuestionIndex(0);
     setScore(0);
+    onPlayAgain?.(); // Call the parent's function to fetch new questions
   };
 
   // Event handler for buttons
@@ -193,6 +211,7 @@ function TriviaGame({ questions }: { questions: Question[] }) {
           score={score}
           totalQuestions={questions.length}
           onPlayAgain={handlePlayAgain}
+          isLoading={isLoading}
         />
       ) : (
         <>
@@ -211,35 +230,84 @@ function TriviaGame({ questions }: { questions: Question[] }) {
   );
 }
 
-// Trivia data hardcoded for now
-const QUESTIONS = [
-  {
-    type: "multiple",
-    difficulty: "medium",
-    category: "History",
-    question:
-      "When did the British hand-over sovereignty of Hong Kong back to China?",
-    correct_answer: "1997",
-    incorrect_answers: ["1999", "1841", "1900"],
-  },
-  {
-    type: "multiple",
-    difficulty: "easy",
-    category: "Science: Mathematics",
-    question: "How many sides does a pentagon have?",
-    correct_answer: "5",
-    incorrect_answers: ["9", "6", "4"],
-  },
-  {
-    type: "multiple",
-    difficulty: "hard",
-    category: "Geography",
-    question: "With which country does France share its largest land border?",
-    correct_answer: "Brazil",
-    incorrect_answers: ["Germany", "Spain", "Canada"],
-  },
-];
-
 export default function App() {
-  return <TriviaGame questions={QUESTIONS} />;
+  const [questions, setQuestions] = useState<Question[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [gameKey, setGameKey] = useState(0);
+
+  useEffect(() => {
+    // Necessary because React Strict Mode mounts components twice as a test
+    const controller = new AbortController();
+    const signal = controller.signal;
+
+    const fetchQuestions = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch(
+          "https://opentdb.com/api.php?amount=5&type=multiple",
+          { signal },
+        );
+        const data: OpenTDBResponse = await response.json();
+
+        if (data.response_code !== 0) {
+          throw new Error("Failed to fetch questions from API");
+        }
+
+        // Decode HTML entities in questions and answers
+        const decodedQuestions = data.results.map((q) => ({
+          ...q,
+          question: decodeHTML(q.question),
+          correct_answer: decodeHTML(q.correct_answer),
+          incorrect_answers: q.incorrect_answers.map((answer) =>
+            decodeHTML(answer),
+          ),
+        }));
+
+        setQuestions(decodedQuestions);
+        setError(null);
+        setIsLoading(false);
+      } catch (err) {
+        if (err instanceof Error && err.name === "AbortError") {
+          return; // Request was cancelled, don't update state, don't set isLoading to false
+        }
+        setError(
+          err instanceof Error
+            ? err.message
+            : "An error occurred while fetching questions",
+        );
+        setQuestions([]);
+        setIsLoading(false); // Only set false on real error
+      }
+    };
+
+    fetchQuestions();
+
+    return () => controller.abort(); // Cancel request on unmount or re-run
+  }, [gameKey]);
+
+  if (isLoading) {
+    return (
+      <div className="game-content">
+        <p>Loading questions...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="game-content">
+        <p>Error: {error}</p>
+        <button onClick={() => window.location.reload()}>Try Again</button>
+      </div>
+    );
+  }
+
+  return (
+    <TriviaGame
+      questions={questions}
+      onPlayAgain={() => setGameKey(gameKey + 1)}
+      isLoading={isLoading}
+    />
+  );
 }

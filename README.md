@@ -2,11 +2,11 @@
 
 ## Features
 
-- Displays multiple choice trivia questions with buttons for answers
+- Loads five multiple choice trivia questions from Open Trivia DB and provides buttons for answers
 - Question number and score are displayed in header
 - Color-codes buttons based on result; green for correct, red for incorrect
 - Waits 1.5 seconds and advances to the next question
-- Display final score and button to restart game
+- Displays final score and button to restart game
 
 ## Tech Stack
 
@@ -16,20 +16,22 @@
 - [Tailwind CSS 4](https://tailwindcss.com/)
 - [Open Trivia DB](https://opentdb.com/)
 
-## Components
+## Component structure
 
-- TriviaGame
-    - GameHeader
-    - GameBoard
-        - QuestionText
-        - AnswerOptions
-    - GameOver
+See [App.tsx](https://github.com/mpleroux/trivia_quiz/blob/main/src/App.tsx):
+
+- App
+    - TriviaGame
+        - GameHeader
+        - GameBoard
+            - QuestionText
+            - AnswerOptions
+        - GameOver
 
 ## Improvements
 
-- [ ] Load questions from Open Trivia DB instead of hardcoded array
-- [ ] Deploy to Netlify
-- [ ] Styling
+- [ ] Setup automatic deployment to Netlify
+- [ ] More elaborate styling
 
 ## Run locally
 
