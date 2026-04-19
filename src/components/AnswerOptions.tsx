@@ -1,6 +1,20 @@
 import { useState, useEffect, useMemo } from "react";
 import { shuffleAnswers, type Question } from "../utils";
 
+type ButtonState = "default" | "correct" | "incorrect" | "disabled";
+
+function getButtonClass(state: ButtonState): string {
+  const baseClass = "block mb-4";
+  const stateClasses: Record<ButtonState, string> = {
+    default: "",
+    correct: " bg-green-500 hover:bg-green-600",
+    incorrect: " bg-red-500 hover:bg-red-600",
+    disabled: "opacity-50",
+  };
+
+  return baseClass + stateClasses[state];
+}
+
 export default function AnswerOptions({
   currentQuestion,
   onAnswerClick,
@@ -45,18 +59,14 @@ export default function AnswerOptions({
         const isCorrect = answer === currentQuestion.correct_answer;
         const isSelected = answer === answered;
 
-        // Determine button styling based on feedback state
-        let buttonClass = "block mb-4";
-        if (answered) {
-          if (isCorrect) {
-            buttonClass += " bg-green-500 hover:bg-green-600";
-          } else if (isSelected) {
-            // not correct
-            buttonClass += " bg-red-500 hover:bg-red-600";
-          } else {
-            buttonClass += " opacity-50";
-          }
-        }
+        const getButtonState = (): ButtonState => {
+          if (!answered) return "default";
+          if (isCorrect) return "correct";
+          if (isSelected) return "incorrect";
+          return "disabled";
+        };
+
+        const buttonClass = getButtonClass(getButtonState());
 
         return (
           <button
