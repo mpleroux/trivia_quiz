@@ -1,5 +1,6 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { shuffleAnswers, type Question } from "../utils";
+import { useAutoAdvance } from "../hooks/useAutoAdvance";
 
 type ButtonState = "default" | "correct" | "incorrect" | "disabled";
 
@@ -9,7 +10,7 @@ function getButtonClass(state: ButtonState): string {
     default: "",
     correct: " bg-green-500 hover:bg-green-600",
     incorrect: " bg-red-500 hover:bg-red-600",
-    disabled: "opacity-50",
+    disabled: " opacity-50",
   };
 
   return baseClass + stateClasses[state];
@@ -40,17 +41,7 @@ export default function AnswerOptions({
     setAnswered(answer);
   };
 
-  // Auto-advance after 1.5 seconds
-  useEffect(() => {
-    if (answered === null) return;
-
-    const timer = setTimeout(() => {
-      onAnswerClick(answered);
-    }, 1500);
-
-    // Cleanup function
-    return () => clearTimeout(timer);
-  }, [answered, onAnswerClick]);
+  useAutoAdvance(answered, onAnswerClick);
 
   return (
     <fieldset>
