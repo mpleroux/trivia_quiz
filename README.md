@@ -16,9 +16,7 @@
 - [Tailwind CSS 4](https://tailwindcss.com/)
 - [Open Trivia DB](https://opentdb.com/)
 
-## Component structure
-
-See [App.tsx](https://github.com/mpleroux/trivia_quiz/blob/main/src/App.tsx):
+## Components
 
 - App
     - TriviaGame
@@ -30,7 +28,6 @@ See [App.tsx](https://github.com/mpleroux/trivia_quiz/blob/main/src/App.tsx):
 
 ## Improvements
 
-- [ ] Setup automatic deployment to Netlify
 - [ ] More elaborate styling
 
 ## Run locally
