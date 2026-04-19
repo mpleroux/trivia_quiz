@@ -16,16 +16,6 @@
 - [Tailwind CSS 4](https://tailwindcss.com/)
 - [Open Trivia DB](https://opentdb.com/)
 
-## Components
-
-- [App](/src/App.tsx)
-    - [TriviaGame](/src/components/TriviaGame.tsx)
-        - [GameHeader](/src/components/GameHeader.tsx)
-        - [GameBoard](/src/components/GameBoard.tsx)
-            - [QuestionText](/src/components/QuestionText.tsx)
-            - [AnswerOptions](/src/components/AnswerOptions.tsx)
-        - [GameOver](/src/components/GameOver.tsx)
-
 ## Improvements
 
 - [ ] More elaborate styling
