@@ -1,5 +1,7 @@
 # README
 
+A trivia game written in React and using questions from Open Trivia DB.
+
 ## Features
 
 - Loads five multiple choice trivia questions from Open Trivia DB and provides buttons for answers
