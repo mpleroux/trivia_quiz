@@ -18,8 +18,8 @@
 
 ## Components
 
-- App
-    - TriviaGame
+- [App](/src/App.tsx)
+    - [TriviaGame](https://github.com/mpleroux/trivia_quiz/blob/main/src/components/TriviaGame.tsx)
         - GameHeader
         - GameBoard
             - QuestionText
