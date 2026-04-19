@@ -19,12 +19,12 @@
 ## Components
 
 - [App](/src/App.tsx)
-    - [TriviaGame](https://github.com/mpleroux/trivia_quiz/blob/main/src/components/TriviaGame.tsx)
-        - GameHeader
-        - GameBoard
-            - QuestionText
-            - AnswerOptions
-        - GameOver
+    - [TriviaGame](/src/components/TriviaGame.tsx)
+        - [GameHeader](/src/components/GameHeader.tsx)
+        - [GameBoard](/src/components/GameBoard.tsx)
+            - [QuestionText](/src/components/QuestionText.tsx)
+            - [AnswerOptions](/src/components/AnswerOptions.tsx)
+        - [GameOver](/src/components/GameOver.tsx)
 
 ## Improvements
 
