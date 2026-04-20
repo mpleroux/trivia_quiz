@@ -2,6 +2,8 @@
 
 A trivia game written in React and using questions from Open Trivia DB.
 
+Live URL: [mpleroux-trivia-quiz.netlify.app/](https://mpleroux-trivia-quiz.netlify.app/)
+
 ## Features
 
 - Loads five multiple choice trivia questions from Open Trivia DB and provides buttons for answers
