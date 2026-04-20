@@ -1,6 +1,5 @@
 import { type Question } from "../utils";
-import QuestionText from "./QuestionText";
-import AnswerOptions from "./AnswerOptions";
+import TrivialPursuitCard from "./TrivialPursuitCard";
 
 export default function GameBoard({
   currentQuestion,
@@ -11,13 +10,11 @@ export default function GameBoard({
   currentQuestionIndex: number;
   onAnswerClick: (answer: string) => void;
 }) {
-  // Key forces fresh shuffled answers
   return (
     <>
-      <QuestionText currentQuestion={currentQuestion} />
-      <AnswerOptions
-        key={currentQuestionIndex}
+      <TrivialPursuitCard
         currentQuestion={currentQuestion}
+        currentQuestionIndex={currentQuestionIndex}
         onAnswerClick={onAnswerClick}
       />
     </>
