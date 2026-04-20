@@ -5,7 +5,7 @@ import { useAutoAdvance } from "../hooks/useAutoAdvance";
 type ButtonState = "default" | "correct" | "incorrect" | "disabled";
 
 function getButtonClass(state: ButtonState): string {
-  const baseClass = "block mb-4";
+  const baseClass = "block mb-4 text-sm md:text-base";
   const stateClasses: Record<ButtonState, string> = {
     default: "",
     correct: " bg-green-500 hover:bg-green-600",
