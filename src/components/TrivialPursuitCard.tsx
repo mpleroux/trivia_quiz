@@ -22,7 +22,32 @@ export default function TrivialPursuitCard({
       {/* Outer dark blue frame */}
       <div className="bg-[#1A4D7A] p-5 shadow-lg/25">
         {/* Inner gold frame */}
-        <div className="border-4 border-[#D4A574] bg-[#FAF6F1] p-4 md:p-5">
+        <div className="relative border-6 border-[#D4A574] bg-[#FAF6F1] p-4 md:p-5">
+          {/* Curved corners */}
+          <svg
+            className="pointer-events-none absolute top-0 left-0 h-5 w-5"
+            viewBox="0 0 40 40">
+            <path d="M 0 0 L 40 0 Q 0 0 0 40 Z" fill="#D4A574" />
+          </svg>
+          <svg
+            className="pointer-events-none absolute top-0 right-0 h-5 w-5"
+            style={{ transform: "scaleX(-1)" }}
+            viewBox="0 0 40 40">
+            <path d="M 0 0 L 40 0 Q 0 0 0 40 Z" fill="#D4A574" />
+          </svg>
+          <svg
+            className="pointer-events-none absolute bottom-0 left-0 h-5 w-5"
+            style={{ transform: "scaleY(-1)" }}
+            viewBox="0 0 40 40">
+            <path d="M 0 0 L 40 0 Q 0 0 0 40 Z" fill="#D4A574" />
+          </svg>
+          <svg
+            className="pointer-events-none absolute right-0 bottom-0 h-5 w-5"
+            style={{ transform: "scaleX(-1) scaleY(-1)" }}
+            viewBox="0 0 40 40">
+            <path d="M 0 0 L 40 0 Q 0 0 0 40 Z" fill="#D4A574" />
+          </svg>
+
           <div className="grid gap-x-8 gap-y-4 md:grid-cols-[5.5rem_1fr] md:gap-y-2">
             {/* Category oval + name */}
             <div className="flex items-center gap-2 md:flex-col md:items-start md:justify-center">
