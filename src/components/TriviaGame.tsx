@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { type Question } from "../utils";
 import GameHeader from "./GameHeader";
-import GameBoard from "./GameBoard";
+import TrivialPursuitCard from "./TrivialPursuitCard";
 import GameOver from "./GameOver";
 
 export default function TriviaGame({
@@ -51,7 +51,7 @@ export default function TriviaGame({
             currentQuestionIndex={currentQuestionIndex}
             score={score}
           />
-          <GameBoard
+          <TrivialPursuitCard
             currentQuestion={questions[currentQuestionIndex]}
             currentQuestionIndex={currentQuestionIndex}
             onAnswerClick={handleAnswerClick}

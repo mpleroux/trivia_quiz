@@ -41,7 +41,6 @@ graph TD
     ErrorScreen["ErrorScreen<br/>(Error Handling)"]
     TriviaGame["TriviaGame<br/>(Main Game Logic)"]
     GameHeader["GameHeader<br/>(Question # & Score)"]
-    GameBoard["GameBoard"]
     TrivialPursuitCard["TrivialPursuitCard<br/>(Card Display)"]
     AnswerOptions["AnswerOptions<br/>(Answer Buttons)"]
     GameOver["GameOver<br/>(Final Score)"]
@@ -51,9 +50,8 @@ graph TD
     App --> ErrorScreen
     App --> TriviaGame
     TriviaGame --> GameHeader
-    TriviaGame --> GameBoard
+    TriviaGame --> TrivialPursuitCard
     TriviaGame --> GameOver
-    GameBoard --> TrivialPursuitCard
     TrivialPursuitCard --> AnswerOptions
 ```
 
