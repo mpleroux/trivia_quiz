@@ -31,6 +31,24 @@ npm install
 npm run dev # http://localhost:3000
 ```
 
+## Architecture
+
+```mermaid
+graph TD
+    TriviaGame["TriviaGame<br/>(Main Game Logic)"]
+    GameHeader["GameHeader<br/>(Question # & Score)"]
+    GameBoard["GameBoard"]
+    TrivialPursuitCard["TrivialPursuitCard<br/>(Card Display)"]
+    AnswerOptions["AnswerOptions<br/>(Answer Buttons)"]
+    GameOver["GameOver<br/>(Final Score)"]
+    
+    TriviaGame --> GameHeader
+    TriviaGame --> GameBoard
+    TriviaGame --> GameOver
+    GameBoard --> TrivialPursuitCard
+    TrivialPursuitCard --> AnswerOptions
+```
+
 ## Screenshot
 
 <img src="./public/screenshot.png" width="400" alt="Screenshot of trivia game">
