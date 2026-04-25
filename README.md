@@ -10,6 +10,7 @@ A trivia game written in React and using questions from [Open Trivia DB](https:/
 - Color-coded buttons based on result; green for correct, red for incorrect
 - Waits 1.5 seconds and advances to the next question
 - Displays final score and button to restart game
+- Added sample unit test for message displayed when game ends
 
 ## Tech Stack
 
