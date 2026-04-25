@@ -71,7 +71,7 @@ export default function TrivialPursuitCard({
             </div>
 
             {/* Question text */}
-            <div className="">
+            <div>
               <div className="hidden font-sans text-sm text-gray-700 md:mb-1 md:block">
                 {decodeHTML(currentQuestion.category)}
               </div>
