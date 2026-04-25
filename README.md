@@ -35,6 +35,10 @@ npm run dev # http://localhost:3000
 
 ```mermaid
 graph TD
+    App["App<br/>(Entry Point)"]
+    IntroScreen["IntroScreen<br/>(Initial Welcome)"]
+    LoadingScreen["LoadingScreen<br/>(Fetching Questions)"]
+    ErrorScreen["ErrorScreen<br/>(Error Handling)"]
     TriviaGame["TriviaGame<br/>(Main Game Logic)"]
     GameHeader["GameHeader<br/>(Question # & Score)"]
     GameBoard["GameBoard"]
@@ -42,6 +46,10 @@ graph TD
     AnswerOptions["AnswerOptions<br/>(Answer Buttons)"]
     GameOver["GameOver<br/>(Final Score)"]
     
+    App --> IntroScreen
+    App --> LoadingScreen
+    App --> ErrorScreen
+    App --> TriviaGame
     TriviaGame --> GameHeader
     TriviaGame --> GameBoard
     TriviaGame --> GameOver
