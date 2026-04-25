@@ -1,4 +1,8 @@
 {
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "types": ["jest"]
+  },
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },
