@@ -5,9 +5,9 @@ A trivia game written in React and using questions from [Open Trivia DB](https:/
 ## Features
 
 - Loads five multiple choice trivia questions from Open Trivia DB and provides buttons for answers
-- Trivial Pursuit card artwork
+- Styling that resembles [Trivial Pursuit cards](./public/trivial-pursuit-card.jpg) with same category colors
 - Question number and score are displayed in header
-- Color-codes buttons based on result; green for correct, red for incorrect
+- Color-coded buttons based on result; green for correct, red for incorrect
 - Waits 1.5 seconds and advances to the next question
 - Displays final score and button to restart game
 
@@ -18,11 +18,6 @@ A trivia game written in React and using questions from [Open Trivia DB](https:/
 - TypeScript
 - Tailwind CSS 4
 - Open Trivia DB
-
-## Improvements
-
-- [ ] Styling and UI enhancements
-- [ ] More comments
 
 ## Run locally
 
