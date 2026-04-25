@@ -20,7 +20,7 @@ export default function TrivialPursuitCard({
   return (
     <>
       {/* Outer dark blue frame */}
-      <div className="bg-[#1A4D7A] p-5 shadow-lg/25">
+      <div className="bg-[#1A4D7A] p-6 shadow-lg/25">
         {/* Inner gold frame */}
         <div className="relative border-6 border-[#D4A574] bg-[#FAF6F1] p-4 md:p-5">
           {/* Curved corners */}
