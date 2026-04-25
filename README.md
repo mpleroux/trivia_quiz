@@ -28,7 +28,7 @@ A trivia game written in React and using questions from [Open Trivia DB](https:/
 
 ```sh
 npm install
-npm run dev # http://localhost:3000
+npm run dev # http://localhost:5173
 ```
 
 ## Architecture
