@@ -17,6 +17,7 @@ A trivia game written in React and using questions from [Open Trivia DB](https:/
 - React 19
 - Vite
 - TypeScript
+- Jest
 - Tailwind CSS 4
 - Open Trivia DB
 
