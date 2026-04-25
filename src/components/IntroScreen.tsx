@@ -6,7 +6,8 @@ export default function IntroScreen({ onStart }: { onStart: () => void }) {
       <p>Test your knowledge!</p>
 
       <p>
-        This is a trivia game using questions from Open Trivia DB. You will be
+        This is a trivia game using questions from the{" "}
+        <a href="https://opentdb.com/">Open Trivia Database</a>. You will be
         given five multiple choice questions with buttons for the possible
         answers. After you make a choice the correct answer will be colored
         green and incorrect answers will be colored red.
