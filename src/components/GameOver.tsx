@@ -1,3 +1,5 @@
+import { getScoreMessage } from "../utils/scoreMessages";
+
 export default function GameOver({
   score,
   totalQuestions,
@@ -11,9 +13,10 @@ export default function GameOver({
 }) {
   return (
     <>
-      <h1 className="text-lg font-medium">Game Over!</h1>
+      <h1 className="text-2xl font-medium">Game Over</h1>
       <p>
-        You scored {score} out of {totalQuestions}.
+        You scored {score} out of {totalQuestions}.{" "}
+        {getScoreMessage(score, totalQuestions)}
       </p>
       <button onClick={onPlayAgain} disabled={isLoading}>
         {isLoading ? "Loading new questions..." : "Play Again"}
