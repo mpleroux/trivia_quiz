@@ -22,16 +22,14 @@ export default function TriviaGame({
     onPlayAgain?.(); // Call the parent's function to fetch new questions
   };
 
-  // Event handler for buttons
+  // Update score and advance the question index when an answer is selected
   const handleAnswerClick = (selectedAnswer: string) => {
     const currentQuestion = questions[currentQuestionIndex];
 
-    // Increment score for correct answer
     if (selectedAnswer === currentQuestion.correct_answer) {
       setScore(score + 1);
     }
 
-    // Advance to next question
     setCurrentQuestionIndex(currentQuestionIndex + 1);
   };
 

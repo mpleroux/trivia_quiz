@@ -4,6 +4,7 @@ import { useAutoAdvance } from "../hooks/useAutoAdvance";
 
 type ButtonState = "default" | "correct" | "incorrect" | "disabled";
 
+// Build a button CSS class string by combining the base style with a state-specific modifier
 function getButtonClass(state: ButtonState): string {
   const baseClass = "block mb-4 text-sm md:text-base";
   const stateClasses: Record<ButtonState, string> = {
@@ -50,6 +51,7 @@ export default function AnswerOptions({
         const isCorrect = answer === currentQuestion.correct_answer;
         const isSelected = answer === answered;
 
+        // Determine the visual state of this button based on the current answer selection
         const getButtonState = (): ButtonState => {
           if (!answered) return "default";
           if (isCorrect) return "correct";

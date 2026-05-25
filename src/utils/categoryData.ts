@@ -32,6 +32,7 @@ const categoryData: Record<string, CategoryData> = {
   "Entertainment: Cartoon & Animations": { abbr: "CA", color: "#E278A0" },
 };
 
+// Look up display data for a category, returning a gray fallback for unrecognized values
 function getCategoryData(category: string): CategoryData {
   const decoded = decodeHTML(category);
   return categoryData[decoded] || { abbr: "?", color: "#999999" };

@@ -23,7 +23,7 @@ export default function TrivialPursuitCard({
       <div className="bg-[#1A4D7A] p-6 shadow-lg/25">
         {/* Inner gold frame */}
         <div className="relative border-6 border-[#D4A574] bg-[#FAF6F1] p-4 md:p-5">
-          {/* Curved corners */}
+          {/* Overlay SVG triangles at each corner to simulate rounded corners on the gold border */}
           <svg
             className="pointer-events-none absolute top-0 left-0 h-5 w-5"
             viewBox="0 0 40 40">

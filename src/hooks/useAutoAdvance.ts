@@ -13,7 +13,7 @@ export function useAutoAdvance(
       onAnswerClick(answered);
     }, delayMs);
 
-    // Cleanup function
+    // Cancel the timer if the question changes or the component unmounts
     return () => clearTimeout(timer);
   }, [answered, onAnswerClick, delayMs]);
 }

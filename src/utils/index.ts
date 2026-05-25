@@ -12,6 +12,7 @@ export interface OpenTDBResponse {
   results: Question[];
 }
 
+// Use a temporary DOM element to decode HTML entities in API responses
 export function decodeHTML(html: string): string {
   const el = document.createElement("textarea");
   el.innerHTML = html;
@@ -21,7 +22,7 @@ export function decodeHTML(html: string): string {
 // This must be located outside a component, due to Math.random() being an "impure function"
 export function shuffleAnswers(correct: string, incorrect: string[]): string[] {
   const answers = [correct, ...incorrect];
-  // Fisher-Yates
+  // Walk backward and swap each element with a randomly selected earlier position
   for (let i = answers.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [answers[i], answers[j]] = [answers[j], answers[i]];

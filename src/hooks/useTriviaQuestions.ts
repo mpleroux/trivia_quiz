@@ -12,15 +12,16 @@ export function useTriviaQuestions(): UseTriviaQuestionsReturn {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [gameKey, setGameKey] = useState(0);
+  const [gameKey, setGameKey] = useState(0); // Incrementing this re-triggers the useEffect to fetch new questions
 
   useEffect(() => {
     // Necessary because React Strict Mode mounts components twice as a test
     const controller = new AbortController();
     const signal = controller.signal;
 
+    // Fetch questions from the API, decode HTML entities, and update state
     const fetchQuestions = async () => {
-      setIsLoading(true); // Always reset to loading when fetch starts
+      setIsLoading(true); // Ensure loading state resets between retries
       try {
         const response = await fetch(
           "https://opentdb.com/api.php?amount=5&type=multiple",
@@ -43,7 +44,7 @@ export function useTriviaQuestions(): UseTriviaQuestionsReturn {
 
         setQuestions(decodedQuestions);
         setError(null);
-        setIsLoading(false); // Turn off loading when done
+        setIsLoading(false);
       } catch (err) {
         if (err instanceof Error && err.name === "AbortError") {
           // Request was cancelled, don't update state, don't set isLoading to false
@@ -56,7 +57,7 @@ export function useTriviaQuestions(): UseTriviaQuestionsReturn {
             : "An error occurred while fetching questions",
         );
         setQuestions([]);
-        setIsLoading(false); // Turn off loading so error displays
+        setIsLoading(false);
       }
     };
 
@@ -65,6 +66,7 @@ export function useTriviaQuestions(): UseTriviaQuestionsReturn {
     return () => controller.abort(); // Cancel request on unmount or re-run
   }, [gameKey]);
 
+  // Increment gameKey to re-trigger the useEffect and fetch a new set of questions
   const retry = () => setGameKey((prev) => prev + 1);
 
   return {
