@@ -1,6 +1,8 @@
-# README
+# Trivia Quiz
 
 A trivia game written in React and using questions from [Open Trivia DB](https://opentdb.com/).
+
+Live demo: [mpleroux-trivia-quiz.netlify.app](https://mpleroux-trivia-quiz.netlify.app/)
 
 ## Features
 
@@ -41,7 +43,7 @@ graph TD
     TrivialPursuitCard["TrivialPursuitCard<br/>(Card Display)"]
     AnswerOptions["AnswerOptions<br/>(Answer Buttons)"]
     GameOver["GameOver<br/>(Final Score)"]
-    
+
     App --> IntroScreen
     App --> LoadingScreen
     App --> ErrorScreen
