@@ -14,7 +14,7 @@
 
 /* manual toggle: if .dark class is on <html> */
 .dark {
-  --color-page-bg: var(--color-gray-800);
+  --color-page-bg: var(--color-slate-900);
   --color-page-text: var(--color-gray-200);
   --color-link: var(--color-blue-400);
   --color-button: var(--color-gray-500);
